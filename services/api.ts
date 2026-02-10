@@ -1,5 +1,5 @@
-import { MOCK_PRODUCTS, MOCK_USER, ADMIN_USER } from '../constants';
-import { Product, User, Order } from '../types';
+import { MOCK_PRODUCTS, MOCK_USER, ADMIN_USER, MOCK_EVENTS, MOCK_LEADERBOARD } from '../constants';
+import { Product, User, Order, Event } from '../types';
 
 // Simulate network delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -76,6 +76,17 @@ class MockApiService {
   async getUserOrders(userId: string): Promise<Order[]> {
     await delay(500);
     return this.orders.filter(o => o.userId === userId);
+  }
+
+  async getEvents(): Promise<Event[]> {
+    await delay(400);
+    return MOCK_EVENTS;
+  }
+
+  async getLeaderboard(): Promise<{name: string, points: number, tier: string}[]> {
+    await delay(400);
+    // Return mock leaderboard sorted by points desc
+    return MOCK_LEADERBOARD.sort((a, b) => b.points - a.points);
   }
 
   // Admin functions

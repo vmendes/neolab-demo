@@ -41,3 +41,13 @@ export interface FilterState {
   maxPrice: number;
   sortBy: 'price-asc' | 'price-desc' | 'rating' | 'newest';
 }
+
+export interface Event {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  type: 'Tournament' | 'Workshop' | 'Meetup';
+  image: string;
+  description: string;
+}

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Truck, ShieldCheck, RefreshCcw, Crown, Zap } from 'lucide-react';
+import { ArrowRight, Star, Truck, ShieldCheck, RefreshCcw, Crown, Zap, Calendar, MapPin, Trophy, Medal } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { api } from '../services/api';
-import { Product } from '../types';
+import { Product, Event } from '../types';
 
 export const Home: React.FC = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [leaderboard, setLeaderboard] = useState<{name: string, points: number, tier: string}[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       const all = await api.getProducts();
       setFeaturedProducts(all.slice(0, 4));
+      
+      const eventsData = await api.getEvents();
+      setEvents(eventsData);
+
+      const leaderboardData = await api.getLeaderboard();
+      setLeaderboard(leaderboardData);
     };
-    fetchProducts();
+    fetchData();
   }, []);
 
   return (
@@ -66,6 +74,47 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+       {/* Upcoming Events Section */}
+       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-end mb-8">
+          <div>
+            <span className="text-neon-cyan text-sm font-bold tracking-wider uppercase mb-1 block">Community</span>
+            <h2 className="text-3xl font-bold text-white">Upcoming Events</h2>
+          </div>
+          <button className="text-sm text-slate-400 hover:text-white transition-colors">View Calendar</button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {events.map((event) => (
+            <div key={event.id} className="group relative bg-dark-surface rounded-xl overflow-hidden border border-dark-border hover:border-neon-cyan/50 transition-all">
+              <div className="h-48 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-surface to-transparent z-10"></div>
+                <img src={event.image} alt={event.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-md border border-slate-700 rounded px-3 py-1 text-xs font-bold text-white">
+                  {event.type}
+                </div>
+              </div>
+              <div className="p-6 relative z-20 -mt-8">
+                <div className="bg-slate-800 rounded px-4 py-1 text-center w-fit mb-4 border border-slate-600 shadow-lg">
+                  <span className="text-neon-cyan font-bold font-mono text-sm">{event.date}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-neon-cyan transition-colors">{event.title}</h3>
+                <div className="flex items-center text-slate-400 text-sm mb-4">
+                  <MapPin size={14} className="mr-1" />
+                  {event.location}
+                </div>
+                <p className="text-slate-400 text-sm mb-6 line-clamp-2">
+                  {event.description}
+                </p>
+                <button className="w-full py-2 border border-slate-600 rounded text-sm font-bold hover:bg-white hover:text-black transition-colors">
+                  Register Now
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* NeoRewards Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 md:p-12 overflow-hidden border border-slate-700">
@@ -110,6 +159,62 @@ export const Home: React.FC = () => {
               </div>
             </div>
          </div>
+      </section>
+
+      {/* Leaderboard Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+           <div className="lg:col-span-1">
+              <h2 className="text-3xl font-bold text-white mb-2">Top VIPs</h2>
+              <p className="text-slate-400 mb-6">Recognizing the most dedicated collectors and magicians in our community.</p>
+              <div className="bg-dark-surface p-6 rounded-xl border border-dark-border">
+                <Trophy size={48} className="text-yellow-400 mb-4" />
+                <h3 className="font-bold text-white text-lg">Hall of Fame</h3>
+                <p className="text-sm text-slate-400 mt-2">Earn points to climb the ranks and unlock exclusive Grandmaster perks.</p>
+              </div>
+           </div>
+           
+           <div className="lg:col-span-3">
+              <div className="bg-dark-surface rounded-xl border border-dark-border overflow-hidden">
+                {leaderboard.map((user, index) => (
+                  <div 
+                    key={index} 
+                    className={`flex items-center justify-between p-4 border-b border-slate-700/50 hover:bg-slate-800/50 transition-colors last:border-0 ${
+                      index === 0 ? 'bg-yellow-400/5' : 
+                      index === 1 ? 'bg-slate-300/5' : 
+                      index === 2 ? 'bg-orange-400/5' : ''
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-lg font-bold text-lg
+                        ${index === 0 ? 'bg-yellow-400 text-black shadow-[0_0_15px_rgba(250,204,21,0.3)]' :
+                          index === 1 ? 'bg-slate-300 text-black' :
+                          index === 2 ? 'bg-orange-400 text-black' :
+                          'bg-slate-800 text-slate-400'
+                        }
+                      `}>
+                         {index + 1}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                           <span className="font-bold text-white">{user.name}</span>
+                           {index < 3 && <Medal size={14} className={
+                             index === 0 ? 'text-yellow-400' :
+                             index === 1 ? 'text-slate-300' : 'text-orange-400'
+                           } />}
+                        </div>
+                        <span className="text-xs text-slate-500 uppercase">{user.tier}</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                       <span className="font-mono font-bold text-neon-cyan">{user.points.toLocaleString()}</span>
+                       <span className="text-xs text-slate-500 hidden sm:inline ml-1">PTS</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+           </div>
+        </div>
       </section>
 
       {/* Featured Products */}

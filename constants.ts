@@ -1,4 +1,4 @@
-import { Product, User } from './types';
+import { Product, User, Event } from './types';
 
 export const MOCK_PRODUCTS: Product[] = [
   {
@@ -102,8 +102,8 @@ export const MOCK_PRODUCTS: Product[] = [
 
 export const MOCK_USER: User = {
   id: 'u1',
-  name: 'Alex Rivera',
-  email: 'alex@neolab.com',
+  name: 'Victor Ridao',
+  email: 'user@neolab.com',
   role: 'user',
   wishlist: ['2', '4'],
   points: 340
@@ -150,4 +150,48 @@ export const LOYALTY_TIERS: LoyaltyTier[] = [
     color: 'text-yellow-400', 
     benefits: ['15% Discount', 'Exclusive Products', 'Free Shipping', 'Personal Concierge'] 
   }
+];
+
+export const MOCK_EVENTS: Event[] = [
+  {
+    id: 'e1',
+    title: 'Neon Nights: Cardistry Open',
+    date: 'OCT 15, 2024',
+    location: 'NeoLab HQ, Tokyo',
+    type: 'Tournament',
+    image: 'https://images.unsplash.com/photo-1559535332-db9971090158?q=80&w=1200',
+    description: 'The biggest cardistry battle of the year. 64 competitors, one champion.'
+  },
+  {
+    id: 'e2',
+    title: 'Sleight of Hand Summit',
+    date: 'NOV 02, 2024',
+    location: 'Virtual Event',
+    type: 'Workshop',
+    image: 'https://images.unsplash.com/photo-1559535332-db9971090158?q=80&w=1200',
+    description: 'Masterclass with the world\'s top magicians. Interactive zoom sessions.'
+  },
+  {
+    id: 'e3',
+    title: 'Midnight Release Party',
+    date: 'DEC 10, 2024',
+    location: 'NYC Pop-up Store',
+    type: 'Meetup',
+    image: 'https://images.unsplash.com/photo-1559535332-db9971090158?q=80&w=1200',
+    description: 'Exclusive first look at the "Void Walker" deck series. Drinks and music.'
+  }
+];
+
+// Mocking a top 10 list
+export const MOCK_LEADERBOARD = [
+  { name: 'CipherZero', points: 12540, tier: 'Grandmaster' },
+  { name: 'Luna_Mage', points: 9820, tier: 'Grandmaster' },
+  { name: 'DeckMaster99', points: 8450, tier: 'Grandmaster' },
+  { name: 'NeonShuffle', points: 7200, tier: 'Grandmaster' },
+  { name: 'GhostPip', points: 5150, tier: 'Grandmaster' },
+  { name: 'AceHunter', points: 4900, tier: 'Master' },
+  { name: 'VelvetTouch', points: 4200, tier: 'Master' },
+  { name: 'CardMechanic', points: 3800, tier: 'Master' },
+  { name: 'RogueSuit', points: 3100, tier: 'Master' },
+  { name: 'Illusionist_X', points: 2950, tier: 'Master' },
 ];
