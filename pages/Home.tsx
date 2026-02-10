@@ -22,7 +22,7 @@ export const Home: React.FC = () => {
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1620121474664-c2810edaa9f3?q=80&w=2670&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1614851099175-e5b30eb6f696?q=80&w=2670&auto=format&fit=crop" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-30"
           />
