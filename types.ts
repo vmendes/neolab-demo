@@ -22,6 +22,7 @@ export interface User {
   email: string;
   role: 'user' | 'admin';
   wishlist: string[]; // Product IDs
+  points: number;
 }
 
 export interface Order {

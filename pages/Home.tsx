@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Truck, ShieldCheck, RefreshCcw } from 'lucide-react';
+import { ArrowRight, Star, Truck, ShieldCheck, RefreshCcw, Crown, Zap } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { api } from '../services/api';
 import { Product } from '../types';
@@ -64,6 +64,52 @@ export const Home: React.FC = () => {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* NeoRewards Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+         <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 md:p-12 overflow-hidden border border-slate-700">
+            {/* Background Decorations */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-neon-cyan rounded-full filter blur-[120px] opacity-10"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-purple rounded-full filter blur-[120px] opacity-10"></div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-yellow-400/10 text-yellow-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-yellow-400/20">
+                  <Crown size={14} /> New Loyalty Program
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Earn Rewards with Every Deck</h2>
+                <p className="text-slate-300 text-lg mb-6 max-w-xl">
+                  Join the <span className="text-neon-cyan font-bold">NeoRewards</span> program. Collect points on every purchase to unlock exclusive discounts, early access to drops, and free shipping.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <div className="flex items-center gap-3 text-sm text-slate-400">
+                    <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                      <Zap size={16} className="text-neon-cyan" />
+                    </div>
+                    <span>10 Points / $1 Spent</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-slate-400">
+                    <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                      <Star size={16} className="text-neon-purple" />
+                    </div>
+                    <span>Tiered Benefits</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-shrink-0 relative">
+                <div className="w-48 h-64 bg-slate-800 rounded-xl border border-slate-600 transform rotate-6 shadow-2xl flex items-center justify-center relative z-10">
+                   <div className="text-center">
+                      <Crown size={48} className="text-yellow-400 mx-auto mb-2" />
+                      <div className="text-2xl font-bold text-white tracking-widest">VIP</div>
+                      <div className="text-xs text-slate-500 uppercase">Member Card</div>
+                   </div>
+                </div>
+                <div className="w-48 h-64 bg-slate-700 rounded-xl border border-slate-600 transform -rotate-6 absolute top-0 left-0 shadow-xl"></div>
+              </div>
+            </div>
+         </div>
       </section>
 
       {/* Featured Products */}

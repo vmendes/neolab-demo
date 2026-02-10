@@ -105,7 +105,8 @@ export const MOCK_USER: User = {
   name: 'Alex Rivera',
   email: 'alex@neolab.com',
   role: 'user',
-  wishlist: ['2', '4']
+  wishlist: ['2', '4'],
+  points: 340
 };
 
 export const ADMIN_USER: User = {
@@ -113,5 +114,40 @@ export const ADMIN_USER: User = {
   name: 'Neo Admin',
   email: 'admin@neolab.com',
   role: 'admin',
-  wishlist: []
+  wishlist: [],
+  points: 9999
 };
+
+export interface LoyaltyTier {
+  name: string;
+  minPoints: number;
+  color: string;
+  benefits: string[];
+}
+
+export const LOYALTY_TIERS: LoyaltyTier[] = [
+  { 
+    name: 'Initiate', 
+    minPoints: 0, 
+    color: 'text-slate-400', 
+    benefits: ['Standard Shipping', 'Access to Community'] 
+  },
+  { 
+    name: 'Adept', 
+    minPoints: 500, 
+    color: 'text-neon-cyan', 
+    benefits: ['5% Discount', 'Member-only Events'] 
+  },
+  { 
+    name: 'Master', 
+    minPoints: 2000, 
+    color: 'text-neon-purple', 
+    benefits: ['10% Discount', 'Early Access to Drops', 'Priority Support'] 
+  },
+  { 
+    name: 'Grandmaster', 
+    minPoints: 5000, 
+    color: 'text-yellow-400', 
+    benefits: ['15% Discount', 'Exclusive Products', 'Free Shipping', 'Personal Concierge'] 
+  }
+];

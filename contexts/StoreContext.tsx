@@ -93,7 +93,13 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       status: 'Pending',
       date: new Date().toISOString()
     };
+    
     await api.createOrder(order);
+    
+    // Calculate and add points locally for immediate UI feedback (10 points per $1)
+    const pointsEarned = Math.floor(cartTotal * 10);
+    setUser(prev => prev ? { ...prev, points: prev.points + pointsEarned } : null);
+    
     clearCart();
     setIsLoading(false);
   };

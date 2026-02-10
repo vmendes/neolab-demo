@@ -8,6 +8,7 @@ import { ProductDetail } from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
 import { Checkout } from './pages/Checkout';
 import { Admin } from './pages/Admin';
+import { Profile } from './pages/Profile';
 
 const Login: React.FC = () => {
   const { login } = useStore();
@@ -69,7 +70,7 @@ const AppRoutes = () => {
       } />
        <Route path="/profile" element={
         <ProtectedRoute>
-          <div className="text-center py-20 text-xl text-slate-400">User Profile Placeholder</div>
+          <Profile />
         </ProtectedRoute>
       } />
       <Route path="/admin" element={
